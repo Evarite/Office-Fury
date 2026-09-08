@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Office.Weapon
+namespace Office.Weapons
 {
+    [CreateAssetMenu(fileName = "New Weapon", menuName = "Office/Weapons/Weapon Data")]
     public class WeaponData : ScriptableObject
     {
         [SerializeField] private float _damage;
