@@ -3,7 +3,7 @@
 namespace Office.Weapons
 {
     /// <summary>
-    /// Basic weapon stats
+    /// Basic weapon stats.
     /// </summary>
     [CreateAssetMenu(fileName = "New Weapon", menuName = "Office/Weapons/Weapon Data")]
     public class WeaponData : ScriptableObject
