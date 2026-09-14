@@ -36,12 +36,8 @@ namespace Office.Weapons
 
             //Perhaps switch to RaycastAll
             if (Physics.Raycast(ray, out RaycastHit hit))
-            {
                 if (hit.collider.TryGetComponent<IHittable>(out var hittable))
-                {
-
-                }
-            }
+                    hittable.Hit(_weaponData.Damage);
         }
     }
 }
