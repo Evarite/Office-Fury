@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Office.Weapons
 {
@@ -18,12 +19,28 @@ namespace Office.Weapons
                 //Attack animation
                 yield return new WaitForSeconds(_weaponData.AttackAnimation.length);
 
-                //Raycast and deal damages
+                MouseRaycastAttack();
 
                 //Attack reset animation
                 yield return new WaitForSeconds(_weaponData.AttackResetAnimation.length);
 
                 yield return new WaitForSeconds(_weaponData.Cooldown);
+            }
+        }
+
+        private void MouseRaycastAttack()
+        {
+            Vector2 screenPoint = Mouse.current.position.ReadValue();
+
+            Ray ray = Camera.main.ScreenPointToRay(screenPoint);
+
+            //Perhaps switch to RaycastAll
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.collider.TryGetComponent<IHittable>(out var hittable))
+                {
+
+                }
             }
         }
     }
