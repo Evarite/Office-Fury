@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Office.Managers
 {
+    /// <summary>
+    /// This class manages global game data and provides access to it.
+    /// </summary>
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }

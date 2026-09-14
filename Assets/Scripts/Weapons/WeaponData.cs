@@ -17,9 +17,16 @@ namespace Office.Weapons
         [Tooltip("How much stamina reduces per hit.")]
         [Min(0f)]
         [SerializeField] private float _staminaCost = 10f;
+        [Tooltip("Animation used to represent the attack.")]
+        [SerializeField] private AnimationClip _attackAnimation;
+        [Tooltip("Animation used to represent attack reset,].")]
+        [SerializeField] private AnimationClip _attackResetAnimation;
 
         public float Damage => _damage;
         public float Cooldown => _cooldown;
         public float StaminaCost => _staminaCost;
+
+        public AnimationClip AttackAnimation { get => _attackAnimation; set => _attackAnimation = value; }
+        public AnimationClip AttackResetAnimation { get => _attackResetAnimation; set => _attackResetAnimation = value; }
     }
 }
