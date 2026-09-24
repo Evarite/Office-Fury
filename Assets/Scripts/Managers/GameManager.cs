@@ -1,4 +1,5 @@
-﻿using Office.Weapons;
+﻿using Office.Input;
+using Office.Weapons;
 using UnityEngine;
 
 namespace Office.Managers
@@ -11,10 +12,18 @@ namespace Office.Managers
         public static GameManager Instance { get; private set; }
 
         private Weapon _currentWeapon;
+        private InputActions _inputSystem;
 
-        public Weapon CurrentWeapon { get => _currentWeapon; set => _currentWeapon = value; }
+        public Weapon CurrentWeapon => _currentWeapon;
+        public InputActions InputSystem => _inputSystem;
 
-        private void Awake() => SingletonSetup();
+        private void Awake()
+        {
+            SingletonSetup();
+
+            _inputSystem = new();
+            _inputSystem.Enable();
+        }
 
         private void SingletonSetup()
         {
@@ -26,5 +35,7 @@ namespace Office.Managers
 
             Instance = this;
         }
+
+        public void RegisterWeapon(Weapon newWeapon) => _currentWeapon = newWeapon;
     }
 }

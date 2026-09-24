@@ -11,6 +11,7 @@ namespace Office.Objects
     public class ObjectDeathHandler : MonoBehaviour, IDeathHandler
     {
         protected Health _health;
+        [SerializeField] protected AnimationClip _deathAnimation;
 
         protected virtual void Awake() => _health = GetComponent<Health>();
 

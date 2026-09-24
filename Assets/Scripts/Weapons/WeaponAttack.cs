@@ -4,25 +4,27 @@ using UnityEngine.InputSystem;
 
 namespace Office.Weapons
 {
+    [RequireComponent(typeof(Animator))]
     public class WeaponAttack : MonoBehaviour
     {
         [SerializeField] private WeaponData _weaponData;
+        private Animator _animator;
 
-        private void OnEnable() => StartCoroutine(Attack());
+        private void Awake() => _animator = GetComponent<Animator>();
 
         private void OnDisable() => StopAllCoroutines();
 
-        private IEnumerator Attack()
+        private IEnumerator AttackDuration()
         {
             while (true)
             {
-                //Attack animation
-                yield return new WaitForSeconds(_weaponData.AttackAnimation.length);
+                _animator.SetBool("Attack", true);
+                yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0).Length);
+                _animator.SetBool("Attack", false);
 
                 MouseRaycastAttack();
 
-                //Attack reset animation
-                yield return new WaitForSeconds(_weaponData.AttackResetAnimation.length);
+                yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0).Length);
 
                 yield return new WaitForSeconds(_weaponData.Cooldown);
             }
@@ -39,5 +41,7 @@ namespace Office.Weapons
                 if (hit.collider.TryGetComponent<IHittable>(out var hittable))
                     hittable.Hit(_weaponData.Damage);
         }
+
+        public void Attack() => StartCoroutine(AttackDuration());
     }
 }
