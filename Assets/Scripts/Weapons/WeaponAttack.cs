@@ -1,38 +1,38 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Office.Weapons
 {
-    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(WeaponAttackAnimation))]
     public class WeaponAttack : MonoBehaviour
     {
         [SerializeField] private WeaponData _weaponData;
-        private Animator _animator;
 
-        private void Awake() => _animator = GetComponent<Animator>();
+        private WeaponAttackAnimation _weaponAttackAnimation;
+
+        private WaitForSeconds _attackCooldown;
+
+        private void Awake()
+        {
+            _weaponAttackAnimation = GetComponent<WeaponAttackAnimation>();
+            _attackCooldown = new WaitForSeconds(_weaponData.Cooldown);
+        }
 
         private void OnDisable() => StopAllCoroutines();
 
         private IEnumerator AttackDuration()
         {
-            while (true)
-            {
-                _animator.SetBool("Attack", true);
-                yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0).Length);
-                _animator.SetBool("Attack", false);
+            _weaponAttackAnimation.Attack();
 
-                MouseRaycastAttack();
+            HitPointRaycast();
 
-                yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0).Length);
-
-                yield return new WaitForSeconds(_weaponData.Cooldown);
-            }
+            yield return _attackCooldown;
         }
 
-        private void MouseRaycastAttack()
+        private void HitPointRaycast()
         {
-            Vector2 screenPoint = Mouse.current.position.ReadValue();
+            //Replace zero with hammer hit pos
+            Vector2 screenPoint = Vector2.zero;
 
             Ray ray = Camera.main.ScreenPointToRay(screenPoint);
 
