@@ -10,6 +10,7 @@ namespace Office.Managers
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
+        public SettingsManager SettingsManager { get; private set; } = new SettingsManager();
 
         private Weapon _currentWeapon;
         private InputActions _inputSystem;

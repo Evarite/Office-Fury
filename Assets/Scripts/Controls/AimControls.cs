@@ -6,35 +6,32 @@ namespace Office.Controls
 {
     public class AimControls : MonoBehaviour
     {
+        [Header("Mouse Delta Ratio")]
+        [SerializeField] private float _mouseDeltaRatio = 0.01f;
+
+        [Header("Position Clamp")]
         [SerializeField] private float _minX;
         [SerializeField] private float _maxX;
         [SerializeField] private float _minZ;
         [SerializeField] private float _maxZ;
 
-        private void OnEnable()
-        {
-            GameManager.Instance.InputSystem.Player.Aim.performed += Aim;
-            GameManager.Instance.InputSystem.Player.Aim.canceled += Aim;
-        }
+        private void OnEnable() => GameManager.Instance.InputSystem.Player.Aim.performed += Aim;
 
-        private void OnDisable()
-        {
-            GameManager.Instance.InputSystem.Player.Aim.performed -= Aim;
-            GameManager.Instance.InputSystem.Player.Aim.canceled -= Aim;
-        }
+        private void OnDisable() => GameManager.Instance.InputSystem.Player.Aim.performed -= Aim;
 
         private void Aim(InputAction.CallbackContext callbackContext)
         {
-            Vector3 delta = callbackContext.ReadValue<Vector2>();
+            Transform weaponTransform = GameManager.Instance.CurrentWeapon.transform;
 
-            Vector3 estimatedPos = GameManager.Instance.CurrentWeapon.transform.position + delta;
+            Vector3 delta = callbackContext.ReadValue<Vector2>() * _mouseDeltaRatio;
 
-            float x = Mathf.Clamp(estimatedPos.x, _minX, _maxX);
-            float z = Mathf.Clamp(estimatedPos.z, _minZ, _maxZ);
+            Vector3 pos = weaponTransform.position + new Vector3(delta.x, 0, delta.y) *
+                GameManager.Instance.SettingsManager.Settings.MouseSensitivity;
 
-            Vector3 clampedPos = new Vector3(x, estimatedPos.y, z);
+            pos.x = Mathf.Clamp(pos.x, _minX, _maxX);
+            pos.z = Mathf.Clamp(pos.z, _minZ, _maxZ);
 
-            GameManager.Instance.CurrentWeapon.transform.position = clampedPos;
+            weaponTransform.position = pos;
         }
     }
 }
