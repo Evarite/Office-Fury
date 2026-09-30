@@ -876,8 +876,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff163da338bff8428c293ecc100ff8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Office.Weapons.Weapon
-  _weaponData: {fileID: 0}
-  _weaponAttack: {fileID: 0}
+  _weaponData: {fileID: 11400000, guid: a96feff5b2b08984ebbe55f41b1e6796, type: 2}
+  _weaponAttack: {fileID: 2005351109}
 --- !u!114 &1908964333
 MonoBehaviour:
   m_ObjectHideFlags: 0
