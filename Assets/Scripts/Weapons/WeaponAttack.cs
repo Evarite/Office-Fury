@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Office.Weapons
 {
     [RequireComponent(typeof(WeaponAttackAnimation))]
+    [AddComponentMenu("Office/Weapons/Weapon Attack")]
     public class WeaponAttack : MonoBehaviour
     {
         [SerializeField] private WeaponData _weaponData;

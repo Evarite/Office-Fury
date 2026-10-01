@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Office.Weapons
 {
     [RequireComponent(typeof(Animator))]
+    [AddComponentMenu("Office/Weapons/Weapon Attack Animation")]
     public class WeaponAttackAnimation : MonoBehaviour
     {
         [SerializeField] private float _animationStateResetDelay = 0.1f;
