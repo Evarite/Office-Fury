@@ -21,6 +21,7 @@ namespace Office.DI
             builder.RegisterComponentInHierarchy<AttackControls>();
             builder.RegisterComponentInHierarchy<AimControls>();
             builder.RegisterComponentInHierarchy<MoneyCounterUI>();
+            builder.RegisterComponentInHierarchy<MoneyChangeEffect>();
         }
     }
 }
