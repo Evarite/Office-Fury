@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SwingUpAnimation
   m_EditorClassIdentifier: Assembly-CSharp::Office.Weapons.Animations.SwingAnimation
   ease: 1
-  _finalRotation: {x: 90, y: 0, z: 0}
+  _finalRotation: {x: 0, y: 0, z: 0}

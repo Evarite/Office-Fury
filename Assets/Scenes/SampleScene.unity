@@ -147,11 +147,11 @@ Transform:
   m_GameObject: {fileID: 22448793}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 0.5333105, y: 0.9439513, z: 0.4451009}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2005351108}
+  m_Father: {fileID: 1908964330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &22448795
 CapsuleCollider:
@@ -233,6 +233,68 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 22448793}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &151709349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 151709350}
+  - component: {fileID: 151709352}
+  - component: {fileID: 151709351}
+  m_Layer: 0
+  m_Name: HammerControls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &151709350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151709349}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1474364321}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &151709351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151709349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87fc55923366b1f4aa1124e2cdb0cb85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Office.Controls.AimControls
+  _mouseDeltaRatio: 0.01
+  _minX: -5
+  _maxX: 5
+  _minZ: -5
+  _maxZ: 5
+--- !u!114 &151709352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151709349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ac920f907a89d45be959d57d83d8eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Office.Controls.AttackControls
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +382,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38409394, y: -0, z: -0, w: 0.92329407}
-  m_LocalPosition: {x: 0, y: 4.28, z: -3.36}
+  m_LocalPosition: {x: 0, y: 4.28, z: -6.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -622,12 +684,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026822718}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.000000027493, y: 1.058, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.658, z: 0}
   m_LocalScale: {x: 0.5387181, y: 0.5893932, z: 0.5387181}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2005351108}
+  m_Father: {fileID: 1908964330}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &1026822720
 CapsuleCollider:
@@ -822,6 +884,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1474364320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1474364321}
+  m_Layer: 0
+  m_Name: Hammer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1474364321
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474364320}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.25215, y: -0, z: -4.50656}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1908964330}
+  - {fileID: 151709350}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1908964329
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,13 +926,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1908964330}
-  - component: {fileID: 1908964333}
   - component: {fileID: 1908964332}
-  - component: {fileID: 1908964331}
   - component: {fileID: 1908964335}
   - component: {fileID: 1908964334}
   m_Layer: 0
-  m_Name: HammerRoot
+  m_Name: HammerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -851,26 +944,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908964329}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.333, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.25215, y: 0.333, z: 4.50656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2005351108}
-  m_Father: {fileID: 0}
+  - {fileID: 22448794}
+  - {fileID: 1026822719}
+  m_Father: {fileID: 1474364321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1908964331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908964329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23ac920f907a89d45be959d57d83d8eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Office.Controls.AttackControls
 --- !u!114 &1908964332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,23 +970,6 @@ MonoBehaviour:
     _staminaCost: 10
     _cooldown: 1
     _duration: 1
---- !u!114 &1908964333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908964329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87fc55923366b1f4aa1124e2cdb0cb85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Office.Controls.AimControls
-  _mouseDeltaRatio: 0.01
-  _minX: -5
-  _maxX: 5
-  _minZ: -5
-  _maxZ: 5
 --- !u!114 &1908964334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,8 +982,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c123aaf6cad9cec40a1d953cd97430b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Office.Weapons.WeaponAttackAnimations
-  _swingDownAnimations: []
-  _swingUpAnimations: []
+  _swingDownAnimations:
+  - {fileID: 11400000, guid: a7a5621fdc08ef74aa5e63254c71722e, type: 2}
+  _swingUpAnimations:
+  - {fileID: 11400000, guid: cacf612cf85515343bdc5ce5a3f5f504, type: 2}
 --- !u!114 &1908964335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,39 +998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7af830c9f35134695ae78f2693950b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Office.Weapons.WeaponAttack
---- !u!1 &2005351106
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2005351108}
-  m_Layer: 0
-  m_Name: Hammer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2005351108
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005351106}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 22448794}
-  - {fileID: 1026822719}
-  m_Father: {fileID: 1908964330}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -972,5 +1006,5 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1325594120}
-  - {fileID: 1908964330}
   - {fileID: 619423415}
+  - {fileID: 1474364321}
