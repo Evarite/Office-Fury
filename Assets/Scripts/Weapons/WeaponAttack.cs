@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Office.Weapons
@@ -6,23 +7,19 @@ namespace Office.Weapons
     [AddComponentMenu("Office/Weapons/Weapon Attack")]
     public class WeaponAttack : MonoBehaviour
     {
-        private Coroutine _attack = null;
+        private Task _attack = null;
 
-        public void Attack(WeaponData data, AttackAnimationController animation) =>
-            _attack ??= StartCoroutine(AttackDuration(data, animation));
-
-        //TODO cache the WFSs
-        private IEnumerator AttackDuration(WeaponData data, AttackAnimationController animation)
+        public async void TryAttack(WeaponData data, AttackAnimationController animController)
         {
-            animation.AnimateRandomly(data.Duration);
-            yield return new WaitForSeconds(data.Duration);
+            if (_attack != null && !_attack.IsCompleted)
+                return;
 
-            Hit();
-
-            yield return new WaitForSeconds(data.Cooldown);
-
-            _attack = null;
+            _attack = Attack(data, animController);
+            await _attack;
         }
+
+        private async Task Attack(WeaponData data, AttackAnimationController animController) =>
+            await animController.AnimateRandomly(data.Duration, Hit).AsyncWaitForCompletion();
 
         //TODO add raycast check under the hammer for IHittable and deal damage
         private void Hit()

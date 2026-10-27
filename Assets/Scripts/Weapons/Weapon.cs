@@ -26,6 +26,6 @@ namespace Office.Weapons
 
         private void OnEnable() => _equipmentManager.CurrentWeapon = this;
 
-        public void Attack() => _weaponAttack.Attack(_weaponData, _weaponAttackAnimations);
+        public void Attack() => _weaponAttack.TryAttack(_weaponData, _weaponAttackAnimations);
     }
 }
