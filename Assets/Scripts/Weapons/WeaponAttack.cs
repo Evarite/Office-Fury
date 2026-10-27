@@ -8,13 +8,13 @@ namespace Office.Weapons
     {
         private Coroutine _attack = null;
 
-        public void Attack(WeaponData data, WeaponAttackAnimation animation) =>
+        public void Attack(WeaponData data, WeaponAttackAnimations animation) =>
             _attack ??= StartCoroutine(AttackDuration(data, animation));
 
         //TODO cache the WFSs
-        private IEnumerator AttackDuration(WeaponData data, WeaponAttackAnimation animation)
+        private IEnumerator AttackDuration(WeaponData data, WeaponAttackAnimations animation)
         {
-            animation.Attack(data.Duration);
+            animation.AnimateRandomly(data.Duration);
             yield return new WaitForSeconds(data.Duration);
 
             Hit();
