@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d577c6004191c3245b27bbc3b27b102b, type: 3}
-  m_Name: SwingAnimation
+  m_Name: SwingDownAnimation
   m_EditorClassIdentifier: Assembly-CSharp::Office.Weapons.Animations.SwingAnimation
   ease: 1
-  _rotationAngle: 90
+  _finalRotation: {x: 90, y: 0, z: 0}
