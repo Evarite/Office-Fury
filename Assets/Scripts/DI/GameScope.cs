@@ -1,4 +1,5 @@
 using Office.Controls;
+using Office.Currency.Money;
 using Office.Managers;
 using VContainer;
 using VContainer.Unity;
@@ -15,9 +16,12 @@ namespace Office.DI
             builder.Register<InputManager>(Lifetime.Singleton);
             builder.Register<EquipmentManager>(Lifetime.Singleton);
             builder.Register<SettingsManager>(Lifetime.Singleton);
+            builder.Register<MoneyCounter>(Lifetime.Singleton);
 
             builder.RegisterComponentInHierarchy<AttackControls>();
             builder.RegisterComponentInHierarchy<AimControls>();
+            builder.RegisterComponentInHierarchy<MoneyCounterUI>();
+            builder.RegisterComponentInHierarchy<MoneyChangeEffect>();
         }
     }
 }
