@@ -5,8 +5,8 @@ namespace Office.Weapons
     /// <summary>
     /// Basic weapon stats.
     /// </summary>
-    [CreateAssetMenu(fileName = "New Weapon", menuName = "Office/Weapons/Weapon Data")]
-    public class WeaponData : ScriptableObject
+    [System.Serializable]
+    public class WeaponData
     {
         [Header("Damage")]
         [Tooltip("How much damage is dealt per hit.")]
@@ -24,11 +24,11 @@ namespace Office.Weapons
         [SerializeField] private float _cooldown = 1f;
         [Tooltip("The time required for the animation to be fully completed.")]
         [Min(0f)]
-        [SerializeField] private float _animationDuration = 1f;
+        [SerializeField] private float _duration = 1f;
 
         public float Damage => _damage;
         public float Cooldown => _cooldown;
         public float StaminaCost => _staminaCost;
-        public float AnimationDuration => _animationDuration;
+        public float Duration => _duration;
     }
 }
