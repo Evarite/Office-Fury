@@ -18,10 +18,13 @@ namespace Office.DI
             builder.Register<SettingsManager>(Lifetime.Singleton);
             builder.Register<MoneyCounter>(Lifetime.Singleton);
 
+            //Controls
             builder.RegisterComponentInHierarchy<AttackControls>();
             builder.RegisterComponentInHierarchy<AimControls>();
-            builder.RegisterComponentInHierarchy<MoneyCounterUI>();
-            builder.RegisterComponentInHierarchy<MoneyChangeEffect>();
+
+            //Money
+            //builder.RegisterComponentInHierarchy<MoneyCounterUI>();
+            //builder.RegisterComponentInHierarchy<MoneyChangeEffect>();
         }
     }
 }

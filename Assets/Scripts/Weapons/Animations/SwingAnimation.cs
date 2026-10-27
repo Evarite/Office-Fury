@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Office.Weapons.Animations
 {
+    [CreateAssetMenu(fileName = "SwingAnimation", menuName = "Office/Weapons/Animations/Swing")]
     public class SwingAnimation : AbstractAnimation
     {
         [SerializeField] private float _rotationAngle = 90f;
