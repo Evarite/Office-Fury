@@ -5,14 +5,14 @@ using VContainer;
 namespace Office.Weapons
 {
     [RequireComponent(typeof(WeaponAttack))]
-    [RequireComponent(typeof(WeaponAttackAnimations))]
+    [RequireComponent(typeof(AttackAnimationController))]
     [AddComponentMenu("Office/Weapons/Weapon")]
     public class Weapon : MonoBehaviour
     {
         [SerializeField] private WeaponData _weaponData;
 
         private WeaponAttack _weaponAttack;
-        private WeaponAttackAnimations _weaponAttackAnimations;
+        private AttackAnimationController _weaponAttackAnimations;
 
         [Inject] private EquipmentManager _equipmentManager;
 
@@ -21,7 +21,7 @@ namespace Office.Weapons
         private void Awake()
         {
             _weaponAttack = GetComponent<WeaponAttack>();
-            _weaponAttackAnimations = GetComponent<WeaponAttackAnimations>();
+            _weaponAttackAnimations = GetComponent<AttackAnimationController>();
         }
 
         private void OnEnable() => _equipmentManager.CurrentWeapon = this;
