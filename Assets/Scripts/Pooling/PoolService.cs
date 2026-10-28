@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 namespace Lab.Pooling
 {
+    [UsedImplicitly]
     public class PoolService : IInitializable
     {
         private readonly PoolData[] _datas;
@@ -41,8 +43,8 @@ namespace Lab.Pooling
         {
             if (_pools.TryGetValue(prefab, out var pool))
             {
-                pool.TryGet(out entity);
-                return true;
+                if(pool.TryGet(out entity))
+                    return true;
             }
 
             Debug.LogError($"No registered pool for prefab: {prefab.name}");

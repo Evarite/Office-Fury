@@ -1,30 +1,37 @@
+using Lab.Pooling;
 using Office.Controls;
 using Office.Currency.Money;
 using Office.Managers;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 namespace Office.DI
 {
     /// <summary>
-    /// Configuration class for dependency injection.
+    ///     Configuration class for dependency injection.
     /// </summary>
+    [AddComponentMenu("Office/DI/GameScope")]
     public class GameScope : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)
         {
+            //Managers
             builder.Register<InputManager>(Lifetime.Singleton);
             builder.Register<EquipmentManager>(Lifetime.Singleton);
             builder.Register<SettingsManager>(Lifetime.Singleton);
-            builder.Register<MoneyCounter>(Lifetime.Singleton);
-
+            
+            //Pooling
+            builder.Register<PoolService>(Lifetime.Singleton);
+            
             //Controls
             builder.RegisterComponentInHierarchy<AttackControls>();
             builder.RegisterComponentInHierarchy<AimControls>();
-
+            
             //Money
-            //builder.RegisterComponentInHierarchy<MoneyCounterUI>();
-            //builder.RegisterComponentInHierarchy<MoneyChangeEffect>();
+            builder.Register<MoneyCounter>(Lifetime.Singleton);
+            builder.RegisterComponentInHierarchy<MoneyCounterUI>();
+            builder.RegisterComponentInHierarchy<MoneyChangeEffect>();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Lab.Pooling
         private readonly IObjectResolver _resolver;
         private readonly Queue<PooledEntity> _pool = new();
 
-        private List<PooledEntity> _activeEntities = new();
+        private readonly List<PooledEntity> _activeEntities = new();
 
         public ObjectPool(PoolData data, Transform parent, IObjectResolver resolver)
         {
