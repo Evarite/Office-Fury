@@ -1,24 +1,27 @@
-﻿namespace Office.Currency.Money
+﻿using JetBrains.Annotations;
+
+namespace Office.Currency.Money
 {
+    [UsedImplicitly]
     public class MoneyCounter
     {
-        private int _count = 0;
-
         public delegate void MoneyUpdateHandler(int newValue, int difference);
 
-        public event MoneyUpdateHandler OnValueChanged;
+        private int _count;
 
         public int Count
         {
             get => _count;
             set
             {
-                int oldValue = _count;
+                var oldValue = _count;
                 _count = value;
-                int dif = _count - oldValue;
+                var dif = _count - oldValue;
 
                 OnValueChanged?.Invoke(value, dif);
             }
         }
+
+        public event MoneyUpdateHandler OnValueChanged;
     }
 }
