@@ -7,12 +7,11 @@ namespace Office.Pooling
 {
     public class ObjectPool
     {
+        private readonly List<PooledEntity> _activeEntities = new();
         private readonly PoolData _data;
         private readonly Transform _parent;
-        private readonly IObjectResolver _resolver;
         private readonly Queue<PooledEntity> _pool = new();
-
-        private readonly List<PooledEntity> _activeEntities = new();
+        private readonly IObjectResolver _resolver;
 
         public ObjectPool(PoolData data, Transform parent, IObjectResolver resolver)
         {
@@ -46,6 +45,29 @@ namespace Office.Pooling
             return true;
         }
 
+        public bool TryGet(Transform parent, out PooledEntity entity)
+        {
+            if (_pool.Count == 0)
+            {
+                if (!_data.CanGrow)
+                {
+                    entity = null;
+                    return false;
+                }
+
+                _pool.Enqueue(CreateInstance());
+            }
+
+            entity = _pool.Dequeue();
+            entity.transform.SetParent(parent, false);
+            entity.gameObject.SetActive(true);
+            entity.OnSpawn();
+
+            _activeEntities.Add(entity);
+
+            return true;
+        }
+
         public void Return(PooledEntity entity)
         {
             if (!entity.gameObject.activeSelf)
@@ -53,6 +75,8 @@ namespace Office.Pooling
 
             entity.OnDespawn();
             entity.gameObject.SetActive(false);
+
+            entity.transform.SetParent(_parent.transform, false);
 
             _activeEntities.Remove(entity);
 

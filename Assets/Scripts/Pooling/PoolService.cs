@@ -11,9 +11,9 @@ namespace Office.Pooling
     {
         private readonly PoolData[] _datas;
 
-        private readonly IObjectResolver _resolver;
-
         private readonly Dictionary<PooledEntity, ObjectPool> _pools = new();
+
+        private readonly IObjectResolver _resolver;
 
         public PoolService(PoolData[] datas, IObjectResolver resolver)
         {
@@ -35,17 +35,26 @@ namespace Office.Pooling
 
                 var parent = new GameObject($"{data.Prefab.name} Pool").transform;
                 parent.SetParent(root);
-                _pools.Add(data.Prefab, new(data, parent, _resolver));
+                _pools.Add(data.Prefab, new ObjectPool(data, parent, _resolver));
             }
         }
 
         public bool TryGet(PooledEntity prefab, out PooledEntity entity)
         {
             if (_pools.TryGetValue(prefab, out var pool))
-            {
-                if(pool.TryGet(out entity))
+                if (pool.TryGet(out entity))
                     return true;
-            }
+
+            Debug.LogError($"No registered pool for prefab: {prefab.name}");
+            entity = null;
+            return false;
+        }
+
+        public bool TryGet(PooledEntity prefab, Transform parent, out PooledEntity entity)
+        {
+            if (_pools.TryGetValue(prefab, out var pool))
+                if (pool.TryGet(parent, out entity))
+                    return true;
 
             Debug.LogError($"No registered pool for prefab: {prefab.name}");
             entity = null;

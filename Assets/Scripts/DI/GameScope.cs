@@ -14,24 +14,28 @@ namespace Office.DI
     [AddComponentMenu("Office/DI/GameScope")]
     public class GameScope : LifetimeScope
     {
+        [Space(20)] [SerializeField] private PoolData[] _poolDatas;
+
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterInstance(_poolDatas);
+
             //Managers
             builder.Register<InputManager>(Lifetime.Singleton);
             builder.Register<EquipmentManager>(Lifetime.Singleton);
             builder.Register<SettingsManager>(Lifetime.Singleton);
-            
+
             //Pooling
             builder.RegisterEntryPoint<PoolService>().AsSelf();
-            
+
             //Controls
             builder.RegisterComponentInHierarchy<AttackControls>();
             builder.RegisterComponentInHierarchy<AimControls>();
-            
+
             //Money
             builder.Register<MoneyCounter>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<MoneyUI>();
-            builder.RegisterComponentInHierarchy<MoneyChangeEffect>();
+            builder.RegisterComponentInHierarchy<MoneyChangeEffectUI>();
         }
     }
 }
