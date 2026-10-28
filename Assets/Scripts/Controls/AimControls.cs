@@ -27,11 +27,11 @@ namespace Office.Controls
 
         private void Aim(InputAction.CallbackContext callbackContext)
         {
-            Transform weaponTransform = _equipmentManager.CurrentWeapon.transform;
+            var weaponTransform = _equipmentManager.CurrentWeapon.transform;
 
             Vector3 delta = callbackContext.ReadValue<Vector2>() * _mouseDeltaRatio;
 
-            Vector3 pos = weaponTransform.position + new Vector3(delta.x, 0, delta.y) *
+            var pos = weaponTransform.position + new Vector3(delta.x, 0, delta.y) *
                 _settingsManager.Settings.MouseSensitivity;
 
             pos.x = Mathf.Clamp(pos.x, _minX, _maxX);
