@@ -3,7 +3,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Lab.Pooling
+namespace Office.Pooling
 {
     public class ObjectPool
     {

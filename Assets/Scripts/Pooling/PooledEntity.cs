@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Lab.Pooling
+namespace Office.Pooling
 {
+    [AddComponentMenu("Office/Pooling/Pooled Entity")]
     public class PooledEntity : MonoBehaviour
     {
         private ObjectPool _pool;

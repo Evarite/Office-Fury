@@ -4,7 +4,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Lab.Pooling
+namespace Office.Pooling
 {
     [UsedImplicitly]
     public class PoolService : IInitializable

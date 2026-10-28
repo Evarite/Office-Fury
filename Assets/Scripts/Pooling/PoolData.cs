@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Lab.Pooling
+namespace Office.Pooling
 {
     [System.Serializable]
     public class PoolData
