@@ -22,7 +22,7 @@ namespace Office.DI
             builder.Register<SettingsManager>(Lifetime.Singleton);
             
             //Pooling
-            builder.Register<PoolService>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<PoolService>().AsSelf();
             
             //Controls
             builder.RegisterComponentInHierarchy<AttackControls>();
