@@ -2,10 +2,10 @@
 using UnityEngine;
 using VContainer;
 
-namespace Office.Currency.Money
+namespace Office.Economy.Money
 {
-    [AddComponentMenu("Office/UI/Money/Money Counter")]
-    public class MoneyCounterUI : MonoBehaviour
+    [AddComponentMenu("Office/UI/Money/Money UI")]
+    public class MoneyUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _displayText;
 
@@ -15,6 +15,7 @@ namespace Office.Currency.Money
 
         private void OnDisable() => _counter.OnValueChanged -= UpdateUI;
 
-        private void UpdateUI(int value, int difference) => _displayText.text = value.ToString();
+        private void UpdateUI(int value, int difference) =>
+            _displayText.text = value.ToString();
     }
 }

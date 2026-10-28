@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace Office.Currency.Money
+namespace Office.Economy.Money
 {
     [UsedImplicitly]
     public class MoneyCounter

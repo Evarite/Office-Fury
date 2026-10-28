@@ -2,7 +2,7 @@ using System;
 using Office.Pooling;
 using UnityEngine;
 
-namespace Office.Currency.Money
+namespace Office.Economy.Money
 {
     [Serializable]
     public class EffectSpawnData

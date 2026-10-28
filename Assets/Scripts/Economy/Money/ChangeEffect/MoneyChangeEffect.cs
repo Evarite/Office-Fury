@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using Office.Economy.Money;
 using Office.Pooling;
 using TMPro;
 using UnityEngine;
 using VContainer;
 
-namespace Office.Currency.Money
+namespace Office.Economy.Money
 {
     [AddComponentMenu("Office/Money/MoneyChangeEffect")]
     public class MoneyChangeEffect : MonoBehaviour

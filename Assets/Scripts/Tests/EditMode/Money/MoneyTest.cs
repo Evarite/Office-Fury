@@ -1,8 +1,5 @@
-using System.Collections;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
-using Office.Currency.Money;
+using Office.Economy.Money;
 
 namespace Office.Tests.EditMode
 {
@@ -13,7 +10,7 @@ namespace Office.Tests.EditMode
         {
             var counter = new MoneyCounter();
             counter.Count += 50;
-            
+
             Assert.AreEqual(50, counter.Count);
         }
     }

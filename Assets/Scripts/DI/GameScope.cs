@@ -1,5 +1,5 @@
 using Office.Controls;
-using Office.Currency.Money;
+using Office.Economy.Money;
 using Office.Managers;
 using Office.Pooling;
 using UnityEngine;
@@ -30,7 +30,7 @@ namespace Office.DI
             
             //Money
             builder.Register<MoneyCounter>(Lifetime.Singleton);
-            builder.RegisterComponentInHierarchy<MoneyCounterUI>();
+            builder.RegisterComponentInHierarchy<MoneyUI>();
             builder.RegisterComponentInHierarchy<MoneyChangeEffect>();
         }
     }
