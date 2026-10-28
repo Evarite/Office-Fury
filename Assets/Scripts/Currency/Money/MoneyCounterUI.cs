@@ -4,6 +4,7 @@ using VContainer;
 
 namespace Office.Currency.Money
 {
+    [AddComponentMenu("Office/UI/Money/Money Counter")]
     public class MoneyCounterUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _displayText;
