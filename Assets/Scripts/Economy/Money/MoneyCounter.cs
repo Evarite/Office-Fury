@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 
 namespace Office.Economy.Money
 {
@@ -14,14 +15,18 @@ namespace Office.Economy.Money
             get => _count;
             set
             {
-                var oldValue = _count;
+                int oldValue = _count;
                 _count = value;
-                var dif = _count - oldValue;
+                int dif = _count - oldValue;
 
                 OnValueChanged?.Invoke(value, dif);
+
+                if (_count < 0f)
+                    OnNegativeBalance?.Invoke();
             }
         }
 
         public event MoneyUpdateHandler OnValueChanged;
+        public event Action OnNegativeBalance;
     }
 }
