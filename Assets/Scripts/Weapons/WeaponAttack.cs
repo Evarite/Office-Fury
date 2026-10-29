@@ -31,10 +31,8 @@ namespace Office.Weapons
             }
         }
 
-        private async UniTask Attack(WeaponData data, AttackAnimationController animController)
-        {
+        private async UniTask Attack(WeaponData data, AttackAnimationController animController) =>
             await animController.AnimateRandomly(data.Duration, Hit).ToUniTask();
-        }
 
         //TODO add raycast check under the hammer for IHittable and deal damage
         private void Hit()
