@@ -40,6 +40,7 @@ namespace Office.DI
 
             //Weapons
             builder.RegisterComponentInHierarchy<WeaponFollow>();
+            builder.RegisterComponentInHierarchy<WeaponAttack>();
         }
     }
 }

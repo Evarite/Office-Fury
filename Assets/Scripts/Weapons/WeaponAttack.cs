@@ -1,12 +1,17 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using VContainer;
 
 namespace Office.Weapons
 {
     [AddComponentMenu("Office/Weapons/Weapon Attack")]
     public class WeaponAttack : MonoBehaviour
     {
+        //TODO Maybe rework _weaponFollow and move it elsewhere
+        
+        [Inject] private WeaponFollow _weaponFollow;
+        
         private bool _isCooldown;
 
         public async void TryAttack(WeaponData data, AttackAnimationController animController)
@@ -17,8 +22,14 @@ namespace Office.Weapons
                     return;
 
                 _isCooldown = true;
-                await Attack(data, animController);
+                var attack = Attack(data, animController);
 
+                _weaponFollow.enabled = false;
+                
+                await attack;
+
+                _weaponFollow.enabled = true;
+                
                 await UniTask.Delay(TimeSpan.FromSeconds(data.Duration));
             }
             catch (Exception e)
