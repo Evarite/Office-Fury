@@ -11,7 +11,7 @@ namespace Office.Weapons.Animations
         public override Tween PlayAnimation(WeaponObjectTransform weaponObjectTransform,
             float duration) =>
             DOTween.Sequence()
-            .Append(weaponObjectTransform.PivotPoint.DORotate(_finalRotation, duration))
-            .SetEase(ease);
+                .Append(weaponObjectTransform.PivotPoint.DORotate(_finalRotation, duration))
+                .SetEase(ease);
     }
 }

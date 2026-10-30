@@ -15,7 +15,9 @@ namespace Office.DI
     [AddComponentMenu("Office/DI/GameScope")]
     public class GameScope : LifetimeScope
     {
-        [Space(20)] [SerializeField] private PoolData[] _poolDatas;
+        [Space(20)]
+        [SerializeField] private PoolData[] _poolDatas;
+        [SerializeField] private Transform _aimIndicatorTransform;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -25,6 +27,8 @@ namespace Office.DI
             builder.Register<InputManager>(Lifetime.Singleton);
             builder.Register<EquipmentManager>(Lifetime.Singleton);
             builder.Register<SettingsManager>(Lifetime.Singleton);
+            builder.Register<AimManager>(Lifetime.Singleton)
+                .WithParameter(_aimIndicatorTransform);
 
             //Pooling
             builder.RegisterEntryPoint<PoolService>().AsSelf();
