@@ -2,6 +2,7 @@ using Office.Controls;
 using Office.Economy.Money;
 using Office.Managers;
 using Office.Pooling;
+using Office.Weapons;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -36,6 +37,9 @@ namespace Office.DI
             builder.Register<MoneyCounter>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<MoneyUI>();
             builder.RegisterComponentInHierarchy<MoneyChangeEffectUI>();
+
+            //Weapons
+            builder.RegisterComponentInHierarchy<WeaponFollow>();
         }
     }
 }
