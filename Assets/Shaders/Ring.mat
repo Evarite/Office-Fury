@@ -51,7 +51,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _InnerRadius: 0.45
+    - _DashCount: 10
+    - _DashFill: 0.5
+    - _InnerRadius: 0.48
     - _OuterRadius: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0

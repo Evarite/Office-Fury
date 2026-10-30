@@ -8,6 +8,9 @@ namespace Office.Controls
     [AddComponentMenu("Office/Controls/Aim Controls")]
     public class AimControls : MonoBehaviour
     {
+        [Header("Aim Indicator")]
+        [SerializeField] private Transform _aimIndicatorTransform;
+        
         [Header("Mouse Delta Ratio")]
         [SerializeField] private float _mouseDeltaRatio = 0.01f;
 
@@ -18,7 +21,6 @@ namespace Office.Controls
         [SerializeField] private float _maxZ;
 
         [Inject] private InputManager _inputManager;
-        [Inject] private EquipmentManager _equipmentManager;
         [Inject] private SettingsManager _settingsManager;
 
         private void OnEnable() => _inputManager.InputSystem.Player.Aim.performed += Aim;
@@ -27,17 +29,15 @@ namespace Office.Controls
 
         private void Aim(InputAction.CallbackContext callbackContext)
         {
-            var weaponTransform = _equipmentManager.CurrentWeapon.transform;
-
             Vector3 delta = callbackContext.ReadValue<Vector2>() * _mouseDeltaRatio;
 
-            var pos = weaponTransform.position + new Vector3(delta.x, 0, delta.y) *
+            var pos = _aimIndicatorTransform.position + new Vector3(delta.x, 0, delta.y) *
                 _settingsManager.Settings.MouseSensitivity;
 
             pos.x = Mathf.Clamp(pos.x, _minX, _maxX);
             pos.z = Mathf.Clamp(pos.z, _minZ, _maxZ);
 
-            weaponTransform.position = pos;
+            _aimIndicatorTransform.position = pos;
         }
     }
 }
