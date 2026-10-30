@@ -10,20 +10,19 @@ namespace Office.Weapons
     [AddComponentMenu("Office/Weapons/Weapon Follow")]
     public class WeaponFollow : MonoBehaviour
     {
-        [SerializeField] private Transform _aimIndicator;
-
         [SerializeField] private Vector3 _targetDistance;
 
         [SerializeField] private float _smoothTime;
+        [Inject] private AimManager _aimManager;
+        private Vector3 _currentVelocity = Vector3.zero;
 
         [Inject] private EquipmentManager _equipmentManager;
 
         private Vector3 _targetPoint;
-        private Vector3 _currentVelocity = Vector3.zero;
 
         private void LateUpdate()
         {
-            _targetPoint = _aimIndicator.position + _targetDistance;
+            _targetPoint = _aimManager.AimIndicatorTransform.position + _targetDistance;
 
             var weaponTransform = _equipmentManager.CurrentWeapon.transform;
 

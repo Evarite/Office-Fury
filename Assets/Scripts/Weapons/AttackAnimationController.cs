@@ -14,8 +14,8 @@ namespace Office.Weapons
 
         private Tween _current;
 
-        public Tween AnimateRandomly(WeaponObjectTransform weaponObjectTransform, float duration,
-            System.Action onImpact = null)
+        public Tween AnimateRandomly(WeaponObjectTransform weaponObjectTransform, Transform target,
+            float duration, System.Action onImpact = null)
         {
             _current?.Kill();
 
@@ -27,9 +27,9 @@ namespace Office.Weapons
             var upAnim = _swingUpAnimations[upIndex];
 
             return _current = DOTween.Sequence()
-                .Append(downAnim.PlayAnimation(weaponObjectTransform, duration))
+                .Append(downAnim.PlayAnimation(weaponObjectTransform, target, duration))
                 .AppendCallback(() => onImpact?.Invoke())
-                .Append(upAnim.PlayAnimation(weaponObjectTransform, duration))
+                .Append(upAnim.PlayAnimation(weaponObjectTransform, target, duration))
                 .SetLink(gameObject);
         }
     }

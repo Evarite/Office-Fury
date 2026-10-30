@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Office.Managers;
 using UnityEngine;
 using VContainer;
 
@@ -8,11 +9,12 @@ namespace Office.Weapons
     [AddComponentMenu("Office/Weapons/Weapon Attack")]
     public class WeaponAttack : MonoBehaviour
     {
-        //TODO Maybe rework _weaponFollow and move it elsewhere
-        
-        [Inject] private WeaponFollow _weaponFollow;
-        
+        [Inject] private AimManager _aimManager;
+
         private bool _isCooldown;
+        //TODO Maybe rework _weaponFollow and move it elsewhere
+
+        [Inject] private WeaponFollow _weaponFollow;
 
         public async void TryAttack(WeaponData data, AttackAnimationController animController)
         {
@@ -25,11 +27,11 @@ namespace Office.Weapons
                 var attack = Attack(data, animController);
 
                 _weaponFollow.enabled = false;
-                
+
                 await attack;
 
                 _weaponFollow.enabled = true;
-                
+
                 await UniTask.Delay(TimeSpan.FromSeconds(data.Duration));
             }
             catch (Exception e)
@@ -44,7 +46,7 @@ namespace Office.Weapons
 
         private async UniTask Attack(WeaponData data, AttackAnimationController animController) =>
             await animController.AnimateRandomly(data.WeaponObjectTransform,
-                data.Duration, Hit).ToUniTask();
+                _aimManager.AimIndicatorTransform, data.Duration, Hit).ToUniTask();
 
         //TODO add raycast check under the hammer for IHittable and deal damage
         private void Hit()

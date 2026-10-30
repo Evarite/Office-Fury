@@ -8,6 +8,6 @@ namespace Office.Weapons.Animations
         [SerializeField] protected Ease ease;
 
         public abstract Tween PlayAnimation(WeaponObjectTransform weaponObjectTransform,
-            float duration);
+            Transform target, float duration);
     }
 }
