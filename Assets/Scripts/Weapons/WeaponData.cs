@@ -1,13 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Office.Weapons
 {
     /// <summary>
-    /// Basic weapon stats.
+    ///     Basic weapon stats.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class WeaponData
     {
+        [Header("Transform")]
+        [Tooltip("Specifies ")]
+        [SerializeField] private WeaponObjectTransform _objectTransform;
+
         [Header("Damage")]
         [Tooltip("How much damage is dealt per hit.")]
         [Min(1f)]
@@ -26,6 +31,7 @@ namespace Office.Weapons
         [Min(0f)]
         [SerializeField] private float _duration = 1f;
 
+        public WeaponObjectTransform WeaponObjectTransform => _objectTransform;
         public float Damage => _damage;
         public float Cooldown => _cooldown;
         public float StaminaCost => _staminaCost;

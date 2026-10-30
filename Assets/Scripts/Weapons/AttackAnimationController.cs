@@ -1,6 +1,8 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Office.Weapons.Animations;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Office.Weapons
 {
@@ -10,11 +12,12 @@ namespace Office.Weapons
         [SerializeField] private AbstractAnimation[] _swingDownAnimations;
         [SerializeField] private AbstractAnimation[] _swingUpAnimations;
 
-        private Tween current;
+        private Tween _current;
 
-        public Tween AnimateRandomly(float duration, System.Action onImpact = null)
+        public Tween AnimateRandomly(WeaponObjectTransform weaponObjectTransform, float duration,
+            System.Action onImpact = null)
         {
-            current?.Kill();
+            _current?.Kill();
 
             float durationPerAnim = duration / 2f;
 
@@ -23,7 +26,7 @@ namespace Office.Weapons
             var downAnim = _swingDownAnimations[downIndex];
             var upAnim = _swingUpAnimations[upIndex];
 
-            return current = DOTween.Sequence()
+            return _current = DOTween.Sequence()
                 .Append(downAnim.PlayAnimation(transform, durationPerAnim))
                 .AppendCallback(() => onImpact?.Invoke())
                 .Append(upAnim.PlayAnimation(transform, durationPerAnim))
