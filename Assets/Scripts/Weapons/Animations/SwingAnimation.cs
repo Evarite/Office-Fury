@@ -8,9 +8,10 @@ namespace Office.Weapons.Animations
     {
         [SerializeField] private Vector3 _finalRotation;
 
-        public override Tween PlayAnimation(Transform transform, float duration) =>
+        public override Tween PlayAnimation(WeaponObjectTransform weaponObjectTransform,
+            float duration) =>
             DOTween.Sequence()
-            .Append(transform.DORotate(_finalRotation, duration))
+            .Append(weaponObjectTransform.PivotPoint.DORotate(_finalRotation, duration))
             .SetEase(ease);
     }
 }

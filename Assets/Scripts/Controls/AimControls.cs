@@ -19,7 +19,7 @@ namespace Office.Controls
         [SerializeField] private float _maxX;
         [SerializeField] private float _minZ;
         [SerializeField] private float _maxZ;
-
+        
         [Inject] private InputManager _inputManager;
         [Inject] private SettingsManager _settingsManager;
 

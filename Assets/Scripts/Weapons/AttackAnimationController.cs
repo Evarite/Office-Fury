@@ -27,9 +27,9 @@ namespace Office.Weapons
             var upAnim = _swingUpAnimations[upIndex];
 
             return _current = DOTween.Sequence()
-                .Append(downAnim.PlayAnimation(transform, durationPerAnim))
+                .Append(downAnim.PlayAnimation(weaponObjectTransform, duration))
                 .AppendCallback(() => onImpact?.Invoke())
-                .Append(upAnim.PlayAnimation(transform, durationPerAnim))
+                .Append(upAnim.PlayAnimation(weaponObjectTransform, duration))
                 .SetLink(gameObject);
         }
     }
