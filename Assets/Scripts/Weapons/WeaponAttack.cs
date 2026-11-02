@@ -24,6 +24,7 @@ namespace Office.Weapons
                     return;
 
                 _isCooldown = true;
+
                 var attack = Attack(data, animController);
 
                 _weaponFollow.enabled = false;
@@ -32,7 +33,7 @@ namespace Office.Weapons
 
                 _weaponFollow.enabled = true;
 
-                await UniTask.Delay(TimeSpan.FromSeconds(data.Duration));
+                await UniTask.Delay(TimeSpan.FromSeconds(data.Cooldown));
             }
             catch (Exception e)
             {

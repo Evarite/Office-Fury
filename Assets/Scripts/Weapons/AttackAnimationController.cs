@@ -9,14 +9,17 @@ namespace Office.Weapons
     [AddComponentMenu("Office/Weapons/Weapon Attack Animation")]
     public class AttackAnimationController : MonoBehaviour
     {
-        [SerializeField] private AbstractAnimation[] _swingDownAnimations;
-        [SerializeField] private AbstractAnimation[] _swingUpAnimations;
+        [SerializeField] private AbstractWeaponAnimation[] _swingDownAnimations;
+        [SerializeField] private AbstractWeaponAnimation[] _swingUpAnimations;
 
         private Tween _current;
 
-        public Tween AnimateRandomly(WeaponObjectTransform weaponObjectTransform, Transform target,
-            float duration, System.Action onImpact = null)
+        public Tween AnimateRandomly(WeaponObjectTransform weaponObjectTransform,
+            Transform target, float duration, Action onImpact = null)
         {
+            var targetOffset = target.position -
+                               weaponObjectTransform.ParentObject.position;
+
             _current?.Kill();
 
             float durationPerAnim = duration / 2f;
@@ -27,9 +30,10 @@ namespace Office.Weapons
             var upAnim = _swingUpAnimations[upIndex];
 
             return _current = DOTween.Sequence()
-                .Append(downAnim.PlayAnimation(weaponObjectTransform, target, duration))
+                .Append(downAnim.PlayAnimation(weaponObjectTransform, target, durationPerAnim))
                 .AppendCallback(() => onImpact?.Invoke())
-                .Append(upAnim.PlayAnimation(weaponObjectTransform, target, duration))
+                .Append(upAnim.PlayAnimationWithTargetOffset(weaponObjectTransform,
+                    target, durationPerAnim, targetOffset))
                 .SetLink(gameObject);
         }
     }
