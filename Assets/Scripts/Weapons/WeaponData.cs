@@ -31,10 +31,14 @@ namespace Office.Weapons
         [Min(0f)]
         [SerializeField] private float _duration = 1f;
 
+        [Header("Visuals")]
+        [SerializeField] private Vector3 _aimOffset = new(0, 1f, -1.5f);
+
         public WeaponObjectTransform WeaponObjectTransform => _objectTransform;
         public float Damage => _damage;
         public float Cooldown => _cooldown;
         public float StaminaCost => _staminaCost;
         public float Duration => _duration;
+        public Vector3 AimOffset => _aimOffset;
     }
 }

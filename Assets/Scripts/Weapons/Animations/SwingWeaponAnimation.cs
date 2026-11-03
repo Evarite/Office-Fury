@@ -9,15 +9,22 @@ namespace Office.Weapons.Animations
         [SerializeField] private Vector3 _finalRotation;
 
         public override Tween PlayAnimation(WeaponObjectTransform weaponObjectTransform,
-            Transform target, float duration)
+            Transform target, float duration, Ease ease)
         {
-            var start = weaponObjectTransform.ParentObject.position;
+            Vector3 start = default;
+            bool isStarted = false;
 
             var move = DOVirtual.Float(0f, 1f, duration, t =>
             {
-                var offset = weaponObjectTransform.StrikingPoint.position -
-                             weaponObjectTransform.ParentObject.position;
-                var parentDest = target.position - offset;
+                if (!isStarted)
+                {
+                    start = weaponObjectTransform.ParentObject.position;
+                    isStarted = true;
+                }
+
+                var offset = weaponObjectTransform.ParentObject.position -
+                             weaponObjectTransform.StrikingPoint.position;
+                var parentDest = target.position + offset;
 
                 weaponObjectTransform.ParentObject.position = Vector3.Lerp(start,
                     parentDest, t);
@@ -34,15 +41,20 @@ namespace Office.Weapons.Animations
 
         public override Tween PlayAnimationWithTargetOffset(
             WeaponObjectTransform weaponObjectTransform, Transform target, float duration,
-            Vector3 targetOffset)
+            Ease ease, Vector3 targetOffset)
         {
-            var start = weaponObjectTransform.ParentObject.position;
+            Vector3 start = default;
+            bool isStarted = false;
 
             var move = DOVirtual.Float(0f, 1f, duration, t =>
             {
-                var offset = weaponObjectTransform.StrikingPoint.position -
-                             weaponObjectTransform.ParentObject.position;
-                var parentDest = target.position - targetOffset;
+                if (!isStarted)
+                {
+                    start = weaponObjectTransform.ParentObject.position;
+                    isStarted = true;
+                }
+
+                var parentDest = target.position + targetOffset;
 
                 weaponObjectTransform.ParentObject.position = Vector3.Lerp(start,
                     parentDest, t);

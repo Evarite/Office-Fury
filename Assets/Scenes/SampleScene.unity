@@ -1563,7 +1563,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c4a9b5a9444f14930417fdf920ac15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Runtime::Office.Weapons.WeaponFollow
-  _targetDistance: {x: 0, y: 0, z: -1.5}
   _smoothTime: 0.2
 --- !u!1 &1855552477
 GameObject:
@@ -1652,12 +1651,13 @@ MonoBehaviour:
   _weaponData:
     _objectTransform:
       _parentObject: {fileID: 1908964330}
-      _strikingPoint: {fileID: 1026822719}
+      _strikingPoint: {fileID: 164683286}
       _pivotPoint: {fileID: 1396458655}
     _damage: 25
     _staminaCost: 10
     _cooldown: 1
-    _duration: 1
+    _duration: 0.4
+    _aimOffset: {x: 0, y: 1, z: -1.5}
 --- !u!114 &1908964334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1674,6 +1674,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7a5621fdc08ef74aa5e63254c71722e, type: 2}
   _swingUpAnimations:
   - {fileID: 11400000, guid: cacf612cf85515343bdc5ce5a3f5f504, type: 2}
+  _easeIn: 2
+  _easeOut: 3
 --- !u!114 &1908964335
 MonoBehaviour:
   m_ObjectHideFlags: 0

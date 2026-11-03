@@ -5,13 +5,11 @@ namespace Office.Weapons.Animations
 {
     public abstract class AbstractWeaponAnimation : ScriptableObject
     {
-        [SerializeField] protected Ease ease;
-
         public abstract Tween PlayAnimation(WeaponObjectTransform weaponObjectTransform,
-            Transform target, float duration);
+            Transform target, float duration, Ease ease);
 
         public abstract Tween PlayAnimationWithTargetOffset(
             WeaponObjectTransform weaponObjectTransform, Transform target, float duration,
-            Vector3 targetOffset);
+            Ease ease, Vector3 targetOffset);
     }
 }
