@@ -9,6 +9,7 @@ namespace Office.Objects
     /// </summary>
     [AddComponentMenu("Office/Objects/BasicObject")]
     [RequireComponent(typeof(Health))]
+    [RequireComponent(typeof(ObjectDeathHandler))]
     public class BasicObject : MonoBehaviour, IHittable
     {
         private Health _health;

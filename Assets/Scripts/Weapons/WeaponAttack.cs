@@ -12,14 +12,14 @@ namespace Office.Weapons
     {
         [SerializeField] private LayerMask _objectsLayer;
         [SerializeField] private int _maxCollisions = 5;
-        
+
         [Inject] private AimManager _aimManager;
+
+        private Collider[] _colliders;
 
         private CancellationToken _destroyToken;
 
         private bool _isCooldown;
-
-        private Collider[] _colliders;
 
         //TODO Maybe rework _weaponFollow and move it elsewhere
 
@@ -42,7 +42,7 @@ namespace Office.Weapons
                 _isCooldown = true;
 
                 var attack = Attack(data, animController).Preserve();
-                
+
                 var calculateSpeed =
                     CalculateEndSpeed(data.WeaponObjectTransform.ParentObject,
                         attack, _destroyToken);
@@ -77,7 +77,7 @@ namespace Office.Weapons
             await animController.AnimateRandomly(data.WeaponObjectTransform,
                     _aimManager.AimIndicatorTransform, data.Duration, () => Hit(data))
                 .ToUniTask(cancellationToken: _destroyToken);
-        
+
         private void Hit(WeaponData data)
         {
             int count = Physics.OverlapSphereNonAlloc(
@@ -85,12 +85,8 @@ namespace Office.Weapons
                 _colliders, _objectsLayer);
 
             for (int i = 0; i < count; i++)
-            {
                 if (_colliders[i].TryGetComponent<IHittable>(out var hittable))
-                {
-                    Debug.Log($"Hit: {data.Damage} damage.");
-                }
-            }
+                    hittable.Hit(data.Damage);
         }
 
         private static async UniTask<Vector3> CalculateEndSpeed(Transform tracked,
