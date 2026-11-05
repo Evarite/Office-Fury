@@ -1,3 +1,4 @@
+using Office.AimIndicator;
 using Office.Controls;
 using Office.Economy.Money;
 using Office.Managers;
@@ -29,6 +30,10 @@ namespace Office.DI
             builder.Register<SettingsManager>(Lifetime.Singleton);
             builder.Register<AimManager>(Lifetime.Singleton)
                 .WithParameter(_aimIndicatorTransform);
+            
+            //AimIndicator
+            builder.RegisterComponentInHierarchy<AimIndicatorController>();
+            builder.RegisterEntryPoint<AimIndicatorSwitch>();
 
             //Pooling
             builder.RegisterEntryPoint<PoolService>().AsSelf();

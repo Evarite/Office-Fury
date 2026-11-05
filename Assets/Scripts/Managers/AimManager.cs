@@ -10,5 +10,7 @@ namespace Office.Managers
             AimIndicatorTransform = aimIndicatorTransform;
 
         public Transform AimIndicatorTransform { get; }
+        
+        public float SphereRadius => AimIndicatorTransform.localScale.x / 2;
     }
 }
