@@ -1,20 +1,33 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Office.Weapons.Animations;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Office.Weapons
 {
+    [RequireComponent(typeof(Weapon))]
     [AddComponentMenu("Office/Weapons/Weapon Attack Animation")]
     public class AttackAnimationController : MonoBehaviour
     {
-        [SerializeField] private AbstractAnimation[] _swingDownAnimations;
-        [SerializeField] private AbstractAnimation[] _swingUpAnimations;
+        [Header("Animations")]
+        [SerializeField] private AbstractWeaponAnimation[] _swingDownAnimations;
+        [SerializeField] private AbstractWeaponAnimation[] _swingUpAnimations;
 
-        private Tween current;
+        [Header("Easing")]
+        [SerializeField] private Ease _easeIn;
+        [SerializeField] private Ease _easeOut;
 
-        public Tween AnimateRandomly(float duration, System.Action onImpact = null)
+        private Tween _current;
+
+        private Weapon _weapon;
+
+        private void Awake() => _weapon = GetComponent<Weapon>();
+
+        public Tween AnimateRandomly(WeaponObjectTransform weaponObjectTransform,
+            Transform target, float duration, Action onImpact = null)
         {
-            current?.Kill();
+            _current?.Kill();
 
             float durationPerAnim = duration / 2f;
 
@@ -23,10 +36,12 @@ namespace Office.Weapons
             var downAnim = _swingDownAnimations[downIndex];
             var upAnim = _swingUpAnimations[upIndex];
 
-            return current = DOTween.Sequence()
-                .Append(downAnim.PlayAnimation(transform, durationPerAnim))
+            return _current = DOTween.Sequence()
+                .Append(downAnim.PlayAnimation(weaponObjectTransform, target,
+                    durationPerAnim, _easeIn))
                 .AppendCallback(() => onImpact?.Invoke())
-                .Append(upAnim.PlayAnimation(transform, durationPerAnim))
+                .Append(upAnim.PlayAnimationWithTargetOffset(weaponObjectTransform,
+                    target, durationPerAnim, _easeOut, _weapon.WeaponData.AimOffset))
                 .SetLink(gameObject);
         }
     }
