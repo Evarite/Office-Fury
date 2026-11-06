@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Office.AimIndicator
 {
-    [RequireComponent(typeof(Renderer))]
+    [RequireComponent(typeof(DecalProjector))]
     [AddComponentMenu("Office/Aim Indicator/Aim Indicator Controller")]
     public class AimIndicatorController : MonoBehaviour
     {
@@ -14,32 +15,43 @@ namespace Office.AimIndicator
         private static readonly int s_dashCountId = Shader.PropertyToID("_DashCount");
         private static readonly int s_dashFillId = Shader.PropertyToID("_DashFill");
 
-        private MaterialPropertyBlock _materialPropertyBlock;
-        private Renderer _renderer;
+        [SerializeField] private float _projectionDepth = 5f;
 
-        private void Awake()
+        private DecalProjector _decalProjector;
+        private Material _instance;
+        private Material _sourceMaterial;
+
+        private void Awake() => _decalProjector = GetComponent<DecalProjector>();
+
+        private void OnDestroy()
         {
-            _renderer = GetComponent<Renderer>();
-            _materialPropertyBlock = new MaterialPropertyBlock();
+            if (_instance != null)
+                Destroy(_instance);
         }
 
         public void Apply(AimIndicatorData data)
         {
-            if (_renderer.sharedMaterial != data.Material)
-                _renderer.sharedMaterial = data.Material;
+            if (_sourceMaterial != data.Material)
+            {
+                if (_instance != null)
+                    Destroy(_instance);
 
-            float scale = data.OuterRadius * 2f;
-            transform.localScale = new Vector3(scale, scale, 1f);
+                _sourceMaterial = data.Material;
+                _instance = new Material(data.Material);
+                _decalProjector.material = _instance;
+            }
+
+            float diameter = data.OuterRadius * 2f;
+            _decalProjector.size = new Vector3(diameter, diameter, _projectionDepth);
+            _decalProjector.pivot = new Vector3(0f, 0f, _projectionDepth * 0.5f);
 
             float innerRadius = data.InnerRadius / data.OuterRadius * MaterialRingRadius;
 
-            _renderer.GetPropertyBlock(_materialPropertyBlock);
-            _materialPropertyBlock.SetFloat(s_outerRadiusId, MaterialRingRadius);
-            _materialPropertyBlock.SetFloat(s_innerRadiusId, innerRadius);
-            _materialPropertyBlock.SetColor(s_ringColorId, data.Color);
-            _materialPropertyBlock.SetFloat(s_dashCountId, data.DashCount);
-            _materialPropertyBlock.SetFloat(s_dashFillId, data.DashFill);
-            _renderer.SetPropertyBlock(_materialPropertyBlock);
+            _instance.SetFloat(s_outerRadiusId, MaterialRingRadius);
+            _instance.SetFloat(s_innerRadiusId, innerRadius);
+            _instance.SetColor(s_ringColorId, data.Color);
+            _instance.SetFloat(s_dashCountId, data.DashCount);
+            _instance.SetFloat(s_dashFillId, data.DashFill);
         }
     }
 }
