@@ -13,7 +13,7 @@ namespace Office.DI
     /// <summary>
     ///     Configuration class for dependency injection.
     /// </summary>
-    [AddComponentMenu("Office/DI/GameScope")]
+    [AddComponentMenu("Office/DI/Game Scope")]
     public class GameScope : LifetimeScope
     {
         [Space(20)]
@@ -25,9 +25,7 @@ namespace Office.DI
             builder.RegisterInstance(_poolDatas);
 
             //Managers
-            builder.Register<InputManager>(Lifetime.Singleton);
             builder.Register<EquipmentManager>(Lifetime.Singleton);
-            builder.Register<SettingsManager>(Lifetime.Singleton);
             builder.Register<AimManager>(Lifetime.Singleton)
                 .WithParameter(_aimIndicatorTransform);
             
@@ -43,7 +41,6 @@ namespace Office.DI
             builder.RegisterComponentInHierarchy<AimControls>();
 
             //Money
-            builder.Register<MoneyCounter>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<MoneyUI>();
             builder.RegisterComponentInHierarchy<MoneyChangeEffectUI>();
 
