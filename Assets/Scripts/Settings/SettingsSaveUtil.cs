@@ -7,6 +7,9 @@ using VContainer.Unity;
 
 namespace Office.Settings
 {
+    /// <summary>
+    /// Save system for Settings. Works separately from SaveSystem.
+    /// </summary>
     public class SettingsSaveUtil : IStartable
     {
         [Inject] private SettingsManager _settingsManager;
