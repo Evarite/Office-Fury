@@ -37,13 +37,13 @@ namespace Office.AimIndicator
                     Destroy(_instance);
 
                 _sourceMaterial = data.Material;
-                _instance = new Material(data.Material);
+                _instance = new(data.Material);
                 _decalProjector.material = _instance;
             }
 
             float diameter = data.OuterRadius * 2f;
-            _decalProjector.size = new Vector3(diameter, diameter, _projectionDepth);
-            _decalProjector.pivot = new Vector3(0f, 0f, _projectionDepth * 0.5f);
+            _decalProjector.size = new(diameter, diameter, _projectionDepth);
+            _decalProjector.pivot = new(0f, 0f, _projectionDepth * 0.5f);
 
             float innerRadius = data.InnerRadius / data.OuterRadius * MaterialRingRadius;
 
