@@ -1,8 +1,15 @@
-﻿namespace Office.Settings
+﻿using UnityEngine;
+
+namespace Office.Settings
 {
     [System.Serializable]
     public class GameSettings
     {
-        public float MouseSensitivity { get; set; } = 1.0f;
+        [SerializeField] private float _mouseSensitivity = 1f;
+
+        public float MouseSensitivity
+        {
+            get => _mouseSensitivity; set => _mouseSensitivity = value;
+        }
     }
 }
