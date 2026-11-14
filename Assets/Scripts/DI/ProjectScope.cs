@@ -1,5 +1,7 @@
 using Office.Economy.Money;
 using Office.Managers;
+using Office.SaveSystem.Data;
+using Office.Settings;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -17,6 +19,9 @@ namespace Office.DI
             
             //Money
             builder.Register<MoneyCounter>(Lifetime.Singleton);
+            
+            //Settings
+            builder.RegisterEntryPoint<SettingsSaveUtil>().AsSelf();
         }
     }
 }
