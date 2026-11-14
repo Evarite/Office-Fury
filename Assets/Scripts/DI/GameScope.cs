@@ -25,8 +25,8 @@ namespace Office.DI
             builder.RegisterInstance(_poolDatas);
 
             //Managers
-            builder.Register<EquipmentManager>(Lifetime.Singleton);
-            builder.Register<AimManager>(Lifetime.Singleton)
+            builder.Register<EquipmentManager>(Lifetime.Scoped);
+            builder.Register<AimManager>(Lifetime.Scoped)
                 .WithParameter(_aimIndicatorTransform);
             
             //AimIndicator
