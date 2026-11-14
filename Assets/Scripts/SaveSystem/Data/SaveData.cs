@@ -1,13 +1,15 @@
+using UnityEngine;
+
 namespace Office.SaveSystem.Data
 {
     [System.Serializable]
     public class SaveData
     {
-        private int _moneyCount;
+        [SerializeField] private int _money;
 
-        public SaveData(int moneyCount)
+        public SaveData(int money)
         {
-            _moneyCount = moneyCount;
+            _money = money;
         }
     }
 }

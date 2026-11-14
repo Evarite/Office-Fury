@@ -23,11 +23,33 @@ namespace Office.Settings
         //Saves when Apply button is pressed.
         public async UniTaskVoid Save()
         {
-            string json = JsonUtility.ToJson(_settingsManager.Settings);
+            var settings = _settingsManager.Settings;
+
+            if (!settings.IsDirty)
+                return;
+            
+            string json = JsonUtility.ToJson(settings);
             await File.WriteAllTextAsync(_savePath, json);
+
+            settings.IsDirty = false;
         }
 
-        private async UniTaskVoid Load()
+        public async UniTaskVoid CancelChanges()
+        {
+            if (!_settingsManager.Settings.IsDirty)
+                return;
+
+            await Load();
+        }
+
+        public void Reset()
+        {
+            GameSettings settings = new();
+            
+            _settingsManager.Load(settings);
+        }
+        
+        private async UniTask Load()
         {
             GameSettings settings = new();
 

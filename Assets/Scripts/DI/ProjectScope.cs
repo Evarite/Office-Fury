@@ -22,6 +22,10 @@ namespace Office.DI
             
             //Settings
             builder.RegisterEntryPoint<SettingsSaveUtil>().AsSelf();
+            
+            //Save System
+            builder.Register<SaveDataFactory>(Lifetime.Singleton);
+            builder.Register<SaveManager>(Lifetime.Singleton);
         }
     }
 }
