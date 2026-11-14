@@ -12,6 +12,7 @@ namespace Office.DI
         {
             //SkillPoints
             builder.Register<SkillPointsCounter>(Lifetime.Scoped);
+            builder.RegisterComponentInHierarchy<SkillPointsUI>();
         }
     }
 }
