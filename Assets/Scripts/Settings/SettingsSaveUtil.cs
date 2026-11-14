@@ -34,7 +34,22 @@ namespace Office.Settings
             settings.IsDirty = false;
         }
 
-        private async UniTaskVoid Load()
+        public async UniTaskVoid CancelChanges()
+        {
+            if (!_settingsManager.Settings.IsDirty)
+                return;
+
+            await Load();
+        }
+
+        public void Reset()
+        {
+            GameSettings settings = new();
+            
+            _settingsManager.Load(settings);
+        }
+        
+        private async UniTask Load()
         {
             GameSettings settings = new();
 
